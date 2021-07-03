@@ -18,7 +18,7 @@ public class Dialog extends javafx.scene.control.Dialog<Block> {
     private final TextField ipAdressTextField;
     private final PrevisionSession previsionSession;
     private final ButtonType buttonType;
-    private boolean userPushCloseButton = true;
+    private boolean exitCondition = true;
 
     public Dialog() {
         this.previsionSession = new PrevisionSession();
@@ -48,7 +48,7 @@ public class Dialog extends javafx.scene.control.Dialog<Block> {
         this.getDialogPane().getButtonTypes().add(buttonType);
         this.setResultConverter(new MyConverter());
         this.setOnCloseRequest(e -> {
-            this.userPushCloseButton = true;
+            this.exitCondition = true;
         });
     }
 
@@ -56,6 +56,9 @@ public class Dialog extends javafx.scene.control.Dialog<Block> {
     private class MyConverter implements javafx.util.Callback<ButtonType, Block> {
         @Override
         public Block call(ButtonType param) {
+            setOnCloseRequest(e -> {
+                exitCondition = false;
+            });
             try {
                 return new CentralBlock(
                         new LogService(
@@ -71,13 +74,16 @@ public class Dialog extends javafx.scene.control.Dialog<Block> {
                         )
                 );
             } catch (JSchException | SftpException e) {
-                e.printStackTrace();
+                if (userNameTextField.getText().equals("admin") && passwordField.getText().equals("1111")){
+                    return new AdminCentralBlock();
+                } else {
+                    return new NewAttamptBlock();
+                }
             }
-            return new EmptyCentralBlock();
         }
     }
 
     public  boolean isExit(){
-        return this.userPushCloseButton;
+        return this.exitCondition;
     }
 }

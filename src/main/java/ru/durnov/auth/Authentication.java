@@ -1,9 +1,10 @@
 package ru.durnov.auth;
 
 import ru.durnov.building.Block;
-import ru.durnov.building.CentralBlock;
+
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class Authentication {
     private final Dialog dialog = new Dialog();
@@ -12,12 +13,17 @@ public class Authentication {
 
     }
 
+    public Authentication(boolean isExit){
+        if (isExit) System.exit(0);
+    }
+
     public Block centralBlock(){
         Optional<Block> optional = this.dialog.showAndWait();
+        System.out.println(isExit());
         if (isExit()) {
-            return new EmptyCentralBlock();
+            System.exit(0);
         }
-        return optional.orElseGet(() -> new Authentication().centralBlock());
+        return optional.orElseGet(this::centralBlock);
     }
 
     public boolean isExit() {

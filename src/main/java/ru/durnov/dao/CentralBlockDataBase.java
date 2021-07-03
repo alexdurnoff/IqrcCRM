@@ -1,7 +1,7 @@
 package ru.durnov.dao;
 
-import ru.durnov.building.RoomDevice;
-import ru.durnov.building.BuildingRoom;
+import ru.durnov.building.Device;
+import ru.durnov.building.Room;
 
 import java.util.Set;
 
@@ -13,12 +13,12 @@ public class CentralBlockDataBase implements DataBase{
     }
 
     @Override
-    public Set<BuildingRoom> roomSet() {
+    public Set<Room> roomSet() {
         return null;
     }
 
     @Override
-    public Set<RoomDevice> deviseSet() {
+    public Set<Device> deviseSet() {
         return null;
     }
 }

@@ -21,7 +21,7 @@ public class CentralBlock implements Block{
     }
 
     @Override
-    public Set<BuildingRoom> roomSet() {
+    public Set<Room> roomSet() {
         return this.daoService.roomSet();
     }
 

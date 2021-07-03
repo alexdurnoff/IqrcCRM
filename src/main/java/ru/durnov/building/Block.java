@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface Block {
-    Set<BuildingRoom> roomSet();
+    Set<Room> roomSet();
     List<File> downLoadedFiles(LocalDate start, LocalDate stop) throws JSchException, SftpException;
     boolean authorize();
 }
