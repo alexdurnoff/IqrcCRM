@@ -12,10 +12,10 @@ import java.util.Set;
 public class CentralBlock implements Block{
     private final DaoService daoService;
     private final SSH ssh;
+    private String buildingName;
 
-
-
-    public CentralBlock(DaoService daoService, SSH ssh) {
+    public CentralBlock(String name, DaoService daoService, SSH ssh) {
+        this.buildingName = name;
         this.daoService = daoService;
         this.ssh = ssh;
     }
@@ -31,7 +31,16 @@ public class CentralBlock implements Block{
     }
 
     @Override
-    public boolean authorize() {
-        return (this.ssh.authorize());
+    public Block withName(String name) {
+        return new CentralBlock(
+                name,
+                this.daoService,
+                this.ssh
+        );
+    }
+
+    @Override
+    public String name() {
+        return this.buildingName;
     }
 }

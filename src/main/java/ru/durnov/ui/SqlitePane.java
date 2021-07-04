@@ -5,7 +5,7 @@ import ru.durnov.building.Block;
 
 import java.util.Set;
 
-public class SqlitePane extends Pane {
+public class SqlitePane extends WorkPane {
     public SqlitePane(Set<Block> blockSet) {
     }
 }

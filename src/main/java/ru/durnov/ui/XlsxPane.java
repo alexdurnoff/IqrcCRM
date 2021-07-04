@@ -5,7 +5,7 @@ import ru.durnov.building.Block;
 
 import java.util.Set;
 
-public class XlsxPane extends Pane {
+public class XlsxPane extends WorkPane {
     public XlsxPane(Set<Block> blockSet) {
     }
 }

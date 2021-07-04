@@ -5,7 +5,8 @@ import ru.durnov.building.Block;
 
 import java.util.Set;
 
-public class JsonPane extends Pane {
+public class JsonPane extends WorkPane {
     public JsonPane(Set<Block> blockSet) {
+        super(blockSet);
     }
 }

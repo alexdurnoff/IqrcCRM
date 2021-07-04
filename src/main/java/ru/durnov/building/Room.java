@@ -6,7 +6,7 @@ import ru.durnov.log.LogRecord;
 import java.util.*;
 
 
-public class Room {
+public class Room implements ChoosePaneElement{
     private final Device controlPanel;
     private final Map<String, Device> deviceMap;
     private final String roomName;
@@ -32,5 +32,10 @@ public class Room {
 
     public void addRecord(LogRecord logRecord){
         this.deviceMap.get(logRecord.macAddress()).addRecord(logRecord);
+    }
+
+    @Override
+    public String name() {
+        return this.roomName;
     }
 }

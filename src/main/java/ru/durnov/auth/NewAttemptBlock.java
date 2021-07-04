@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class NewAttamptBlock implements Block {
+public class NewAttemptBlock implements Block {
     @Override
     public Set<Room> roomSet() {
         return Collections.emptySet();
@@ -23,7 +23,12 @@ public class NewAttamptBlock implements Block {
     }
 
     @Override
-    public boolean authorize() {
-        return false;
+    public Block withName(String name) {
+        return this;
+    }
+
+    @Override
+    public String name() {
+        return "";
     }
 }

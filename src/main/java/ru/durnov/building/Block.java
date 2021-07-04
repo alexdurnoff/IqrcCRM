@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-public interface Block {
+public interface Block extends ChoosePaneElement{
     Set<Room> roomSet();
     List<File> downLoadedFiles(LocalDate start, LocalDate stop) throws JSchException, SftpException;
-    boolean authorize();
+    Block withName(String name);
 }

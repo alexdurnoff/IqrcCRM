@@ -68,6 +68,7 @@ public class Dialog extends javafx.scene.control.Dialog<Block> {
             }
             try {
                 CentralBlock centralBlock = new CentralBlock(
+                        userNameTextField.getText(),
                         new LogService(
                                 userNameTextField.getText(),
                                 passwordField.getText(),
@@ -87,7 +88,7 @@ public class Dialog extends javafx.scene.control.Dialog<Block> {
                 );
                 return centralBlock;
             } catch (JSchException | SftpException e) {
-                return new NewAttamptBlock();
+                return new NewAttemptBlock();
             }
         }
     }

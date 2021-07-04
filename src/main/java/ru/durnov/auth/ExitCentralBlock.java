@@ -23,7 +23,12 @@ public class ExitCentralBlock implements Block {
     }
 
     @Override
-    public boolean authorize() {
-        return false;
+    public Block withName(String name) {
+        return this;
+    }
+
+    @Override
+    public String name() {
+        return "";
     }
 }

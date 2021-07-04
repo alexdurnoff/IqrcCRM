@@ -23,7 +23,12 @@ public class AdminCentralBlock implements Block {
     }
 
     @Override
-    public boolean authorize() {
-        return true;
+    public Block withName(String name) {
+        return this;
+    }
+
+    @Override
+    public String name() {
+        return "";
     }
 }
