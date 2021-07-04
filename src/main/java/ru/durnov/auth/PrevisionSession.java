@@ -35,11 +35,15 @@ class PrevisionSession {
         return ip;
     }
 
-    void save(String user, String passwd, String ipAddress) throws IOException {
+    void save(String user, String passwd, String ipAddress) {
         this.properties.setProperty("userName", user);
         this.properties.setProperty("password", passwd);
         this.properties.setProperty("ip", ipAddress);
-        this.properties.store(Files.newOutputStream(path), "");
+        try {
+            this.properties.store(Files.newOutputStream(path), "");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

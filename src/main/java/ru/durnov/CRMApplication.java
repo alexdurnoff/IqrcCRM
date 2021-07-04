@@ -13,11 +13,6 @@ public class CRMApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Block block = authentication.centralBlock();
-        while (!block.authorize()){
-            System.out.println(block.getClass());
-            if (block instanceof ExitCentralBlock) System.exit(0);
-            block = authentication.centralBlock();
-        }
-
+        System.out.println(block.getClass());
     }
 }

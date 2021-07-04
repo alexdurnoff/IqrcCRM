@@ -19,7 +19,6 @@ public class Authentication {
 
     public Block centralBlock(){
         Optional<Block> optional = this.dialog.showAndWait();
-        System.out.println(isExit());
         if (isExit()) {
             System.exit(0);
         }

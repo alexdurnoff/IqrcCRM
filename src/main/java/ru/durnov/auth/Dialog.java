@@ -18,7 +18,7 @@ public class Dialog extends javafx.scene.control.Dialog<Block> {
     private final TextField ipAdressTextField;
     private final PrevisionSession previsionSession;
     private final ButtonType buttonType;
-    private boolean exitCondition = true;
+    private boolean exitCondition = false;
 
     public Dialog() {
         this.previsionSession = new PrevisionSession();
@@ -46,21 +46,28 @@ public class Dialog extends javafx.scene.control.Dialog<Block> {
         gridPane.setHgap(10);
         this.getDialogPane().setContent(gridPane);
         this.getDialogPane().getButtonTypes().add(buttonType);
+        this.setResult(new ExitCentralBlock());
         this.setResultConverter(new MyConverter());
         this.setOnCloseRequest(e -> {
-            this.exitCondition = true;
+            if (this.getResult() instanceof ExitCentralBlock) this.exitCondition = true;
         });
+        this.setOnShown(e -> this.exitCondition = false);
     }
 
 
     private class MyConverter implements javafx.util.Callback<ButtonType, Block> {
         @Override
         public Block call(ButtonType param) {
-            setOnCloseRequest(e -> {
-                exitCondition = false;
-            });
+            if (userNameTextField.getText().equals("admin") && passwordField.getText().equals("1111")){
+                previsionSession.save(
+                        userNameTextField.getText(),
+                        passwordField.getText(),
+                        ipAdressTextField.getText()
+                );
+                return new AdminCentralBlock();
+            }
             try {
-                return new CentralBlock(
+                CentralBlock centralBlock = new CentralBlock(
                         new LogService(
                                 userNameTextField.getText(),
                                 passwordField.getText(),
@@ -73,12 +80,14 @@ public class Dialog extends javafx.scene.control.Dialog<Block> {
                                 passwordField.getText()
                         )
                 );
+                previsionSession.save(
+                        userNameTextField.getText(),
+                        passwordField.getText(),
+                        ipAdressTextField.getText()
+                );
+                return centralBlock;
             } catch (JSchException | SftpException e) {
-                if (userNameTextField.getText().equals("admin") && passwordField.getText().equals("1111")){
-                    return new AdminCentralBlock();
-                } else {
-                    return new NewAttamptBlock();
-                }
+                return new NewAttamptBlock();
             }
         }
     }
