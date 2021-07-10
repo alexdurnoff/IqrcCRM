@@ -7,5 +7,6 @@ import java.util.Set;
 
 public class XlsxPane extends WorkPane {
     public XlsxPane(Set<Block> blockSet) {
+        super(blockSet);
     }
 }

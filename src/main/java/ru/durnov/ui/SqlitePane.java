@@ -7,5 +7,6 @@ import java.util.Set;
 
 public class SqlitePane extends WorkPane {
     public SqlitePane(Set<Block> blockSet) {
+        super(blockSet);
     }
 }
